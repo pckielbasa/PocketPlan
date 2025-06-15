@@ -3,26 +3,26 @@
     <changeSet id="1" author="pkielbasa">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="user"/>
+                <tableExists tableName="users"/>
             </not>
         </preConditions>
-        <createTable tableName="user">
+        <createTable tableName="users">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="first_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_name" type="VARCHAR(255)">
+            <column name="surname" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

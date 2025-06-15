@@ -1,17 +1,20 @@
 package com.pkielbasa.pocketplan.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.springframework.lang.NonNull;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Transaction")
+@Table(name = "transactions")
 public class Transaction {
 
     @Id
@@ -20,13 +23,23 @@ public class Transaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "budget_id", nullable = false)
+    @NotNull
     private Budget budget;
+
+    @Column(name = "transaction_name", nullable = false)
+    @NotBlank
     private String name;
+
+    @Column
     private String description;
+
+    @Column(name = "transaction_type", nullable = false)
+    @NotBlank
     private String type;
 
-
-
+    @Column(name = "transaction_date" , nullable = false)
+    @NotNull
+    private LocalDateTime date;
 }
 
 
