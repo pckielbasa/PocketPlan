@@ -3,10 +3,10 @@
     <changeSet id="1" author="pkielbasa">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="transaction"/>
+                <tableExists tableName="transactions"/>
             </not>
         </preConditions>
-        <createTable tableName="transaction">
+        <createTable tableName="transactions">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

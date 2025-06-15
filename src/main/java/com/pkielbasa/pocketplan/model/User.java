@@ -1,32 +1,40 @@
 package com.pkielbasa.pocketplan.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
-@Table(name = "User")
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true)
+    @NotBlank
     private String username;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
+    @NotBlank
     private String password;
 
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(name = "email_address", nullable = false, unique = true)
+    @Email
     private String email;
 
-    @Column(name = "first_name", nullable = false, length = 255)
+    @Column(name = "first_name", nullable = false)
+    @NotBlank
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 255)
-    private String lastName;
+    @Column(name = "surname", nullable = false)
+    @NotBlank
+    private String surname;
 }
