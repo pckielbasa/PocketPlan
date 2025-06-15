@@ -11,8 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "user_budgets")
-public class UserBudgets {
+@Table(name = "user_budget")
+public class UserBudget {
 
     @EmbeddedId
     private UserBudgetId id;

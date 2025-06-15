@@ -1,28 +1,25 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet id="create-users-table" author="pkielbasa">
+    <changeSet id="create-budget-table" author="pkielbasa">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="users"/>
+                <tableExists tableName="budget"/>
             </not>
         </preConditions>
-        <createTable tableName="users">
+        <createTable tableName="budget">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="username" type="VARCHAR(255)">
+            <column name="initial_budget" type="DECIMAL(19,2)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="password" type="VARCHAR(255)">
+            <column name="current_budget" type="DECIMAL(19,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
+            <column name="budget_day" type="VARCHAR(255)">
+                <constraints nullable="false" />
             </column>
-            <column name="first_name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="surname" type="VARCHAR(255)">
+            <column name="budget_type" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

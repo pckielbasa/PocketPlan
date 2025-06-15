@@ -22,11 +22,11 @@ public class Budget {
 
     @Column(name = "initial_budget", nullable = false)
     @NotNull
-    private BigDecimal initial_budget;
+    private BigDecimal initialBudget;
 
     @Column(name = "current_budget", nullable = false)
     @NotNull
-    private BigDecimal current_budget;
+    private BigDecimal currentBudget;
 
     @Column(name = "budget_day", nullable = false)
     @NotNull
