@@ -1,4 +1,4 @@
-package com.pkielbasa.pocketplan.model;
+package com.pkielbasa.pocketplan.domain.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
