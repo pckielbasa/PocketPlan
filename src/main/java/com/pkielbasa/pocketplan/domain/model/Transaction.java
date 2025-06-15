@@ -1,10 +1,9 @@
-package com.pkielbasa.pocketplan.model;
+package com.pkielbasa.pocketplan.domain.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 
