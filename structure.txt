@@ -1,0 +1,20 @@
+src
+ └─ main
+     └─ java
+         └─ com.pkielbasa.pocketplan
+             ├─ domain               // logika domenowa (encje, agregaty, serwisy domenowe)
+             │    ├─ model           // encje, value objects
+             │    ├─ service         // serwisy domenowe (logika czysto biznesowa)
+             │    └─ repository      // interfejsy repozytoriów (np. do bazy)
+             │
+             ├─ application          // serwisy aplikacyjne, koordynacja operacji
+             │    ├─ service         // serwisy aplikacyjne (koordynują użycie domeny)
+             │    └─ dto             // DTO do komunikacji z zewnątrz
+             │
+             ├─ infrastructure       // implementacje repozytoriów, integracje, konfiguracje
+             │    ├─ repository      // implementacje repozytoriów (np. JpaRepository)
+             │    └─ config          // konfiguracje techniczne
+             │
+             └─ interface            // warstwa wejścia/wyjścia
+                  ├─ rest            // kontrolery REST
+                  └─ mapper          // mapowanie między encjami a DTO
