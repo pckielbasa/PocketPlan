@@ -1,10 +1,9 @@
 package com.pkielbasa.pocketplan.infrastructure.repository.jpa;
 
 import com.pkielbasa.pocketplan.domain.model.User;
-import com.pkielbasa.pocketplan.domain.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaUserRepository extends JpaRepository<User, Long>, UserRepository {
+public interface JpaUserRepository extends JpaRepository<User, Long> {
 }

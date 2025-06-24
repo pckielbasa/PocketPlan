@@ -1,6 +1,7 @@
 package com.pkielbasa.pocketplan.api.rest;
 
-import com.pkielbasa.pocketplan.domain.model.User;
+import com.pkielbasa.pocketplan.application.dto.CreateUserRequest;
+import com.pkielbasa.pocketplan.application.dto.UserResponse;
 import com.pkielbasa.pocketplan.application.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody User user) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
         try {
-            Long userId = userService.createUser(user);
+            Long userId = userService.createUser(request);
             URI location = URI.create("/api/users/" + userId);
-            UserResponse response = new UserResponse(userId, user.getUsername(), user.getEmail());
+            UserResponse response = new UserResponse(userId, request.username(), request.email());
             return ResponseEntity.created(location).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

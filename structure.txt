@@ -13,8 +13,10 @@ src
              │
              ├─ infrastructure       // implementacje repozytoriów, integracje, konfiguracje
              │    ├─ repository      // implementacje repozytoriów (np. JpaRepository)
+             │    │    ├─ impl       // implementacja repozytoriów
+             │    │    └─ jpa        // implementacja JpaRepository
              │    └─ config          // konfiguracje techniczne
              │
-             └─ interface            // warstwa wejścia/wyjścia
+             └─ api                  // warstwa wejścia/wyjścia
                   ├─ rest            // kontrolery REST
                   └─ mapper          // mapowanie między encjami a DTO

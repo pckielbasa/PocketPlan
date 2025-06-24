@@ -1,26 +1,20 @@
 package com.pkielbasa.pocketplan.application.service;
 
+import com.pkielbasa.pocketplan.api.mapper.UserMapper;
+import com.pkielbasa.pocketplan.application.dto.CreateUserRequest;
 import com.pkielbasa.pocketplan.domain.model.User;
 import com.pkielbasa.pocketplan.domain.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public Long createUser(User user) {
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(user.getPassword());
-        newUser.setEmail(user.getEmail());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setSurname(user.getSurname());
-        User savedUser = userRepository.save(newUser);
+    public Long createUser(CreateUserRequest request) {
+        User savedUser = userRepository.save(UserMapper.toEntity(request));
         return savedUser.getId();
     }
 }

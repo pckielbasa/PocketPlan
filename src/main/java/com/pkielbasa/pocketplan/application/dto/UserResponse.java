@@ -1,3 +1,3 @@
-package com.pkielbasa.pocketplan.api.rest;
+package com.pkielbasa.pocketplan.application.dto;
 
 public record UserResponse(Long id, String username, String email) {}
