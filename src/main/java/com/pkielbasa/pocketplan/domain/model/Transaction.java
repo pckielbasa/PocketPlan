@@ -25,18 +25,18 @@ public class Transaction {
     @NotNull
     private Budget budget;
 
-    @Column(name = "transaction_name", nullable = false)
+    @Column(name = "name", nullable = false)
     @NotBlank
     private String name;
 
     @Column
     private String description;
 
-    @Column(name = "transaction_type", nullable = false)
+    @Column(name = "type", nullable = false)
     @NotBlank
     private String type;
 
-    @Column(name = "transaction_date" , nullable = false)
+    @Column(name = "date" , nullable = false)
     @NotNull
     private LocalDateTime date;
 }
