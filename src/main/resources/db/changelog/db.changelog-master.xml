@@ -6,7 +6,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <include file="/db/changelog/create-table/db.changelog-user.xml"/>
-    <include file="/db/changelog/create-table/db.changelog-transaction.xml"/>
+    <include file="/db/changelog/create-table/transaction/db.changelog-transaction.xml"/>
     <include file="/db/changelog/create-table/db.changelog-budget.xml"/>
     <include file="/db/changelog/create-table/db.changelog-users-budgets.xml"/>
+    <include file="/db/changelog/create-table/transaction/db.changelog-add-foreign-key-to-transactions.xml"/>
 </databaseChangeLog>
