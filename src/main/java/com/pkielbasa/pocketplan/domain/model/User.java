@@ -28,6 +28,7 @@ public class User {
     private String password;
 
     @Column(name = "email_address", nullable = false, unique = true)
+
     @NotBlank
     @Email
     private String email;
@@ -39,5 +40,4 @@ public class User {
     @Column(name = "surname", nullable = false)
     @NotBlank
     private String surname;
-
 }
