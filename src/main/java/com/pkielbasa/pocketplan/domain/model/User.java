@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import lombok.Data;
 
 @Entity
 @Data
@@ -27,6 +28,8 @@ public class User {
     private String password;
 
     @Column(name = "email_address", nullable = false, unique = true)
+
+    @NotBlank
     @Email
     private String email;
 
