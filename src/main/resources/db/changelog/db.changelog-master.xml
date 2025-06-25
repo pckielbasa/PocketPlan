@@ -10,4 +10,6 @@
     <include file="/db/changelog/create-table/db.changelog-budget.xml"/>
     <include file="/db/changelog/create-table/db.changelog-users-budgets.xml"/>
     <include file="/db/changelog/create-table/transaction/db.changelog-add-foreign-key-to-transactions.xml"/>
+    <include file="/db/changelog/create-table/transaction/db.changelog-add-date-to-transactions.xml"/>
+
 </databaseChangeLog>
