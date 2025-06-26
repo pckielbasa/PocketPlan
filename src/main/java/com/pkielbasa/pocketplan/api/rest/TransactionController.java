@@ -1,6 +1,8 @@
 package com.pkielbasa.pocketplan.api.rest;
 
-import com.pkielbasa.pocketplan.application.dto.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
+import com.pkielbasa.pocketplan.application.dto.transaction.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.application.dto.transaction.TransactionResponse;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/transactions")
@@ -19,12 +23,14 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    ResponseEntity<String> createTransaction(@RequestBody CreateTransactionRequest request) {
+    ResponseEntity<TransactionResponse> createTransaction(@RequestBody CreateTransactionRequest request) {
         try{
-            transactionService.createTransaction(request);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Transaction transaction = transactionService.createTransaction(request);
+            URI location = new URI("/api/transactions/" + transaction.getId());
+            TransactionResponse response = TransactionMapper.mapToResponse(transaction);
+            return ResponseEntity.created(location).body(response);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 }
