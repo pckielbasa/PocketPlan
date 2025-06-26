@@ -1,5 +1,7 @@
 package com.pkielbasa.pocketplan.application.service;
 
+import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
+import com.pkielbasa.pocketplan.application.dto.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,8 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
 
-    public void createTransaction(Transaction transaction) {
-        transactionRepository.createTransaction(transaction);
+    public Long createTransaction(CreateTransactionRequest request) {
+        Transaction savedTransaction = transactionRepository.createTransaction(TransactionMapper.mapToEntity(request));
+        return savedTransaction.getId();
     }
 }
