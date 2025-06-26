@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,6 +36,10 @@ public class Transaction {
     @Column(name = "type", nullable = false)
     @NotBlank
     private String type;
+
+    @Column(name = "fee", nullable = false)
+    @NotBlank
+    private BigDecimal fee;
 
     @Column(name = "date" , nullable = false)
     @NotNull
