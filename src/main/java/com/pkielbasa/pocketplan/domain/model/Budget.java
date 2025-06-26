@@ -30,7 +30,7 @@ public class Budget {
 
     @Column(name = "budget_day", nullable = false)
     @NotNull
-    private LocalDate budgetDay ;
+    private String budgetDay ;
 
     @Column(name = "budget_type", nullable = false)
     @NotBlank
