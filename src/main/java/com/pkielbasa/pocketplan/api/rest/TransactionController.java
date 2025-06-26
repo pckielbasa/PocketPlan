@@ -1,5 +1,6 @@
 package com.pkielbasa.pocketplan.api.rest;
 
+import com.pkielbasa.pocketplan.application.dto.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,9 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    ResponseEntity<String> createTransaction(@RequestBody Transaction transaction) {
+    ResponseEntity<String> createTransaction(@RequestBody CreateTransactionRequest request) {
         try{
-            transactionService.createTransaction(transaction);
+            transactionService.createTransaction(request);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
