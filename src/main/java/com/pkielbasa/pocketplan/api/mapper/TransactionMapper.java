@@ -1,6 +1,7 @@
 package com.pkielbasa.pocketplan.api.mapper;
 
-import com.pkielbasa.pocketplan.application.dto.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.application.dto.transaction.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.application.dto.transaction.TransactionResponse;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 
@@ -15,5 +16,17 @@ public class TransactionMapper {
                 .fee(request.fee())
                 .date(request.date())
                 .build();
+    }
+
+    public static TransactionResponse mapToResponse(Transaction transaction) {
+        return new TransactionResponse(
+                transaction.getId(),
+                transaction.getBudget().getId(),
+                transaction.getName(),
+                transaction.getDescription(),
+                transaction.getType(),
+                transaction.getFee(),
+                transaction.getDate()
+        );
     }
 }
