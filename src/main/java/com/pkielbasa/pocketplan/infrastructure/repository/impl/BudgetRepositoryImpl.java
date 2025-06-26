@@ -6,6 +6,8 @@ import com.pkielbasa.pocketplan.infrastructure.repository.jpa.JpaBudgetRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class BudgetRepositoryImpl implements BudgetRepository {
@@ -15,5 +17,10 @@ public class BudgetRepositoryImpl implements BudgetRepository {
     @Override
     public Budget createBudget(Budget budget) {
         return jpaBudgetRepository.save(budget);
+    }
+
+    @Override
+    public Optional<Budget> findBudgetById(long id) {
+        return jpaBudgetRepository.findById(id);
     }
 }

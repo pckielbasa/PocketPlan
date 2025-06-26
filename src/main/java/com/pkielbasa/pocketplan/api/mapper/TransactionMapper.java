@@ -6,9 +6,7 @@ import com.pkielbasa.pocketplan.domain.model.Transaction;
 
 public class TransactionMapper {
 
-    public static Transaction mapToEntity(CreateTransactionRequest request) {
-        Budget budget = new Budget();
-        budget.setId(request.budgetId());
+    public static Transaction mapToEntity(CreateTransactionRequest request, Budget budget) {
         return Transaction.builder()
                 .budget(budget)
                 .name(request.name())
