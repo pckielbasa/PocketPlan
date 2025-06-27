@@ -7,4 +7,5 @@ import java.util.List;
 public interface TransactionRepository {
     Transaction createTransaction(Transaction transaction);
     List<Transaction> getTransactionByName(String transactionName);
+    List<Transaction> getAllTransactions();
 }
