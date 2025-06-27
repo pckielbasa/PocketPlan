@@ -24,4 +24,9 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         return jpaTransactionRepository.getTransactionsByName(transactionName);
     }
 
+    @Override
+    public List<Transaction> getAllTransactions() {
+        return jpaTransactionRepository.findAll();
+    }
+
 }

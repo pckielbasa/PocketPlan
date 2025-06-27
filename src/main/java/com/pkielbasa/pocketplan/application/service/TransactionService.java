@@ -27,4 +27,13 @@ public class TransactionService {
     public List<Transaction> getTransactionByName(String name) {
         return transactionRepository.getTransactionByName(name);
     }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.getAllTransactions();
+    }
+
+//    public List<Transaction> getTransactionByBudget(Budget budget) {
+//        return null;
+//    }
+
 }

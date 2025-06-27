@@ -42,4 +42,9 @@ public class TransactionController {
             }
         return ResponseEntity.ok(responses);
     }
+
+    @GetMapping("/search")
+    ResponseEntity<List<TransactionResponse>> getAllTransactions() {
+        return ResponseEntity.ok(transactionService.getAllTransactions().stream().map(TransactionMapper::mapToResponse).collect(Collectors.toList()));
+    }
 }
