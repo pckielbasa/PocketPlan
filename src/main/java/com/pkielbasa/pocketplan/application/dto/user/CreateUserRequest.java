@@ -1,4 +1,4 @@
-package com.pkielbasa.pocketplan.application.dto;
+package com.pkielbasa.pocketplan.application.dto.user;
 
 public record CreateUserRequest(
         String username,
