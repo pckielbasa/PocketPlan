@@ -7,6 +7,7 @@ import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.BudgetRepository;
 import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,8 +33,9 @@ public class TransactionService {
         return transactionRepository.getAllTransactions();
     }
 
-//    public List<Transaction> getTransactionByBudget(Budget budget) {
-//        return null;
-//    }
+    public List<Transaction> getSortedTransactionByDate(String sortBy, String direction) {
+        Sort.Direction dir = Sort.Direction.fromString(direction);
+        return transactionRepository.getSortedTransactionByDate(Sort.by(dir, sortBy));
+    }
 
 }

@@ -6,11 +6,13 @@ import com.pkielbasa.pocketplan.application.dto.transaction.TransactionResponse;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,5 +48,17 @@ public class TransactionController {
     @GetMapping("/search")
     ResponseEntity<List<TransactionResponse>> getAllTransactions() {
         return ResponseEntity.ok(transactionService.getAllTransactions().stream().map(TransactionMapper::mapToResponse).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/search/sort")
+    ResponseEntity<List<TransactionResponse>> getSortTransactionsByDateDesc(@RequestParam(defaultValue = "date") String sortBy,
+                                                                            @RequestParam(defaultValue = "asc") String direction) {
+
+        List<Transaction> transactions = transactionService.getSortedTransactionByDate(sortBy, direction);
+        List<TransactionResponse> responses = transactions.stream()
+                .map(TransactionMapper::mapToResponse)
+                .toList();
+
+        return ResponseEntity.ok(responses);
     }
 }
