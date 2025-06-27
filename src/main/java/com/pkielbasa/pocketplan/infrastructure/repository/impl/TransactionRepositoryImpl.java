@@ -6,6 +6,8 @@ import com.pkielbasa.pocketplan.infrastructure.repository.jpa.JpaTransactionRepo
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class TransactionRepositoryImpl implements TransactionRepository {
@@ -16,4 +18,10 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     public Transaction createTransaction(Transaction transaction) {
         return jpaTransactionRepository.save(transaction);
     }
+
+    @Override
+    public List<Transaction> getTransactionByName(String transactionName) {
+        return jpaTransactionRepository.getTransactionsByName(transactionName);
+    }
+
 }

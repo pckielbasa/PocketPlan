@@ -9,6 +9,8 @@ import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
@@ -19,7 +21,10 @@ public class TransactionService {
     public Transaction createTransaction(CreateTransactionRequest request) {
         Budget budget = budgetRepository.findBudgetById(request.budgetId())
                 .orElseThrow(() -> new IllegalArgumentException("Budget by id: "+ request.budgetId() +" not found"));
-
         return transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
+    }
+
+    public List<Transaction> getTransactionByName(String name) {
+        return transactionRepository.getTransactionByName(name);
     }
 }

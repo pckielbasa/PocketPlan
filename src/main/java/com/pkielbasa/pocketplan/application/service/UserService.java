@@ -1,7 +1,7 @@
 package com.pkielbasa.pocketplan.application.service;
 
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
-import com.pkielbasa.pocketplan.application.dto.CreateUserRequest;
+import com.pkielbasa.pocketplan.application.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.domain.model.User;
 import com.pkielbasa.pocketplan.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

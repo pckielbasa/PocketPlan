@@ -1,7 +1,7 @@
 package com.pkielbasa.pocketplan.api.rest;
 
-import com.pkielbasa.pocketplan.application.dto.CreateUserRequest;
-import com.pkielbasa.pocketplan.application.dto.UserResponse;
+import com.pkielbasa.pocketplan.application.dto.user.CreateUserRequest;
+import com.pkielbasa.pocketplan.application.dto.user.UserResponse;
 import com.pkielbasa.pocketplan.application.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

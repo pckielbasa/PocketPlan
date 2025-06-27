@@ -1,6 +1,6 @@
 package com.pkielbasa.pocketplan.api.mapper;
 
-import com.pkielbasa.pocketplan.application.dto.CreateUserRequest;
+import com.pkielbasa.pocketplan.application.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.domain.model.User;
 
 public class UserMapper {
