@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface BudgetRepository {
     Budget createBudget(Budget budget);
-    Optional<Budget> findBudgetById(long id);
+    Optional<Budget> getBudgetById(long id);
 }
