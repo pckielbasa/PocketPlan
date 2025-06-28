@@ -20,7 +20,7 @@ public class BudgetRepositoryImpl implements BudgetRepository {
     }
 
     @Override
-    public Optional<Budget> findBudgetById(long id) {
+    public Optional<Budget> getBudgetById(long id) {
         return jpaBudgetRepository.findById(id);
     }
 }

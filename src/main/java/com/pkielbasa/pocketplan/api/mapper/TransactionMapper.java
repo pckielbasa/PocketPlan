@@ -1,7 +1,7 @@
 package com.pkielbasa.pocketplan.api.mapper;
 
-import com.pkielbasa.pocketplan.application.dto.transaction.CreateTransactionRequest;
-import com.pkielbasa.pocketplan.application.dto.transaction.TransactionResponse;
+import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 

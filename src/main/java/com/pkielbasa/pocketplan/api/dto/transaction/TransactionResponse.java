@@ -1,9 +1,10 @@
-package com.pkielbasa.pocketplan.application.dto.transaction;
+package com.pkielbasa.pocketplan.api.dto.transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record CreateTransactionRequest(
+public record TransactionResponse(
+        Long id,
         Long budgetId,
         String name,
         String description,

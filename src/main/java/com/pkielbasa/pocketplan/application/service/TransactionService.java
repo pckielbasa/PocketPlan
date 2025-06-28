@@ -1,8 +1,9 @@
 package com.pkielbasa.pocketplan.application.service;
 
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
-import com.pkielbasa.pocketplan.application.dto.transaction.CreateTransactionRequest;
+import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.application.exception.ResourceNotFoundException;
+import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.BudgetRepository;
@@ -20,13 +21,15 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final BudgetRepository budgetRepository;
+    private final EntityFetcherService entityFetcherService;
+
 
     public Optional<Transaction> getTransaction(long id) {
         return transactionRepository.getTransactionById(id);
     }
 
     public Transaction createTransaction(CreateTransactionRequest request) {
-        Budget budget = budgetRepository.findBudgetById(request.budgetId())
+        Budget budget = budgetRepository.getBudgetById(request.budgetId())
                 .orElseThrow(() -> new ResourceNotFoundException("Budget by id: "+ request.budgetId() +" not found"));
         return transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
     }
@@ -45,10 +48,8 @@ public class TransactionService {
     }
 
     public Transaction updateTransaction(CreateTransactionRequest request, long id) {
-        Transaction oldTransaction = transactionRepository.getTransactionById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transaction by id: "+ id +" not found"));
-        Budget budget = budgetRepository.findBudgetById(request.budgetId())
-                .orElseThrow(() -> new ResourceNotFoundException("Budget by id: "+ request.budgetId() +" not found"));
+        Transaction oldTransaction = entityFetcherService.fetchTransactionOrThrow(id);
+        Budget budget = entityFetcherService.fetchBudgetOrThrow(request.budgetId());
         TransactionMapper.updateEntity(oldTransaction, request, budget);
         return transactionRepository.updateTransaction(oldTransaction);
     }
