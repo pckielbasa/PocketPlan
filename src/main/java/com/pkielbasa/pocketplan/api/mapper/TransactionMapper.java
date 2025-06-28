@@ -29,4 +29,13 @@ public class TransactionMapper {
                 transaction.getDate()
         );
     }
+
+    public static void updateEntity(Transaction existingTransaction, CreateTransactionRequest request, Budget budget) {
+        existingTransaction.setName(request.name());
+        existingTransaction.setDescription(request.description());
+        existingTransaction.setType(request.type());
+        existingTransaction.setFee(request.fee());
+        existingTransaction.setDate(request.date());
+        existingTransaction.setBudget(budget);
+    }
 }
