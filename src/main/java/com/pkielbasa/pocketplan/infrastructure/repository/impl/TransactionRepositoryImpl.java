@@ -5,6 +5,7 @@ import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
 import com.pkielbasa.pocketplan.infrastructure.repository.jpa.JpaTransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,18 +28,8 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> getTransactionByName(String transactionName) {
-        return jpaTransactionRepository.getTransactionsByName(transactionName);
-    }
-
-    @Override
-    public List<Transaction> getAllTransactions() {
-        return jpaTransactionRepository.findAll();
-    }
-
-    @Override
-    public List<Transaction> getSortedTransaction(Sort sort) {
-        return jpaTransactionRepository.findAll(sort);
+    public List<Transaction> getTransactions(Specification<Transaction> specification, Sort sort) {
+        return jpaTransactionRepository.findAll(specification, sort);
     }
 
     @Override
