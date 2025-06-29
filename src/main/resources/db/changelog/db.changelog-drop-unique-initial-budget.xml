@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet  id="remove-unique-initial-budget"  author="pkielbasa">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="budget"/>
+            <columnExists tableName="budget" columnName="initial_budget"/>
+        </preConditions>
+            <dropUniqueConstraint
+                    constraintName="budget_initial_budget_key"
+                    tableName="budget"/>
+    </changeSet>
+
+</databaseChangeLog>

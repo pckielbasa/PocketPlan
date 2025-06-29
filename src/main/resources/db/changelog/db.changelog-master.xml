@@ -12,5 +12,5 @@
     <include file="/db/changelog/create-table/transaction/db.changelog-add-foreign-key-to-transactions.xml"/>
     <include file="/db/changelog/create-table/transaction/db.changelog-add-date-to-transactions.xml"/>
     <include file="/db/changelog/create-table/transaction/db.changelog-add-fee-to-transactions.xml"/>
-
+    <include file="/db/changelog/db.changelog-drop-unique-initial-budget.xml"/>
 </databaseChangeLog>

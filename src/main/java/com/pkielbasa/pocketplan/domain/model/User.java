@@ -4,11 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import lombok.Data;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@ToString(exclude = {"budgets"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,6 +19,7 @@ import lombok.Data;
 public class User {
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -40,4 +44,29 @@ public class User {
     @Column(name = "surname", nullable = false)
     @NotBlank
     private String surname;
+
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(
+            name = "user_budget",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "budget_id")
+    )
+    private Set<Budget> budgets = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        if (id == null || user.id == null) {
+            return false;
+        }
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

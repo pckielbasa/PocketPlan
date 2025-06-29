@@ -6,17 +6,21 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"users"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Budget")
+@Table(name = "budget")
 public class Budget {
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -35,4 +39,25 @@ public class Budget {
     @Column(name = "budget_type", nullable = false)
     @NotBlank
     private String budgetType;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "budgets")
+    private Set<User> users = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Budget budget = (Budget) o;
+        if (id == null || budget.id == null) {
+            return false;
+        }
+        return id.equals(budget.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }
