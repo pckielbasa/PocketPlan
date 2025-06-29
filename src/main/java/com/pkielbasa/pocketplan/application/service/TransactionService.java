@@ -1,15 +1,19 @@
 package com.pkielbasa.pocketplan.application.service;
 
+import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.application.exception.ResourceNotFoundException;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
+import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.BudgetRepository;
 import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
+import com.pkielbasa.pocketplan.infrastructure.repository.specification.TransactionSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +28,7 @@ public class TransactionService {
     private final EntityFetcherService entityFetcherService;
 
 
-    public Optional<Transaction> getTransaction(long id) {
+    public Optional<Transaction> getTransactions(long id) {
         return transactionRepository.getTransactionById(id);
     }
 
@@ -34,17 +38,10 @@ public class TransactionService {
         return transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
     }
 
-    public List<Transaction> getTransactionByName(String name) {
-        return transactionRepository.getTransactionByName(name);
-    }
-
-    public List<Transaction> getAllTransactions() {
-        return transactionRepository.getAllTransactions();
-    }
-
-    public List<Transaction> getSortedTransaction(String sortBy, String direction) {
-        Sort.Direction dir = Sort.Direction.fromString(direction);
-        return transactionRepository.getSortedTransaction(Sort.by(dir, sortBy));
+    public List<Transaction> getTransactions(TransactionSearchCriteria criteria) {
+        Specification<Transaction> spec = TransactionSpecification.byCriteria(criteria);
+        Sort sort = SortUtils.buildSort(criteria.sort(), criteria.direction());
+        return transactionRepository.getTransactions(spec, sort);
     }
 
     public Transaction updateTransaction(CreateTransactionRequest request, long id) {
