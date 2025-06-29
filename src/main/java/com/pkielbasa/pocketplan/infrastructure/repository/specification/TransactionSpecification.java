@@ -28,6 +28,15 @@ public class TransactionSpecification {
                         )
                 );
             }
+
+            if (criteria.budgetId() != null) {
+                predicate = criteriaBuilder.and(predicate,
+                        criteriaBuilder.equal(
+                                root.get("budget").get("id"),
+                                criteria.budgetId()
+                        ));
+            }
+
             return predicate;
         };
     }
