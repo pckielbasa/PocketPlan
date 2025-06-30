@@ -3,7 +3,6 @@ package com.pkielbasa.pocketplan.api.rest;
 import com.pkielbasa.pocketplan.application.service.BudgetService;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +14,9 @@ public class BudgetController {
     private final BudgetService budgetService;
 
     @PostMapping
-    public ResponseEntity<String> createBudget(@RequestBody Budget budget,
+    public ResponseEntity<Budget> createBudget(@RequestBody Budget budget,
                                                @RequestParam long userId) {
-        try {
-            budgetService.createBudget(budget, userId);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        Budget created = budgetService.createBudget(budget, userId);
+        return ResponseEntity.ok(created);
     }
 }

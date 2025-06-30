@@ -12,7 +12,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = {"users"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,12 +19,11 @@ import java.util.Set;
 public class Budget {
 
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "initial_budget", nullable = false)
-    @NotNull
+    @NotNull(message = "budget init cannot be null")
     private BigDecimal initialBudget;
 
     @Column(name = "current_budget", nullable = false)
@@ -40,8 +38,6 @@ public class Budget {
     @NotBlank
     private String budgetType;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "budgets")
     private Set<User> users = new HashSet<>();
 

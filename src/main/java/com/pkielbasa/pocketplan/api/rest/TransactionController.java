@@ -4,7 +4,7 @@ import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
-import com.pkielbasa.pocketplan.application.exception.ResourceNotFoundException;
+import com.pkielbasa.pocketplan.exception.ResourceNotFoundException;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
