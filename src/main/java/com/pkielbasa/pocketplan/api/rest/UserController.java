@@ -4,7 +4,6 @@ import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.application.service.UserService;
-import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,10 @@ import java.net.URI;
 public class UserController {
 
     private final UserService userService;
-    private final EntityFetcherService entityFetcherService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable long id) {
-            UserResponse userResponse= entityFetcherService.fetchUserResponseOrThrow(id);
+    public ResponseEntity<UserResponse> getUserById(@PathVariable long id) {
+            UserResponse userResponse= userService.getUserById(id);
             return ResponseEntity.ok(userResponse);
     }
 
