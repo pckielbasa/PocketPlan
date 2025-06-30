@@ -1,7 +1,5 @@
 package com.pkielbasa.pocketplan.application.util;
 
-import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
-import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.model.User;
@@ -33,12 +31,5 @@ public class EntityFetcherService {
     public User fetchUserOrThrow(Long userId) {
         return userRepository.getUserById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User by id: " + userId + " not found"));
-
-    }
-
-    public UserResponse fetchUserResponseOrThrow(Long userId) {
-        User user = userRepository.getUserById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User by id: " + userId + " not found"));
-        return UserMapper.mapToResponse(user);
     }
 }
