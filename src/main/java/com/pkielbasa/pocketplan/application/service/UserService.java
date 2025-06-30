@@ -13,8 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Long createUser(CreateUserRequest request) {
-        User savedUser = userRepository.save(UserMapper.toEntity(request));
-        return savedUser.getId();
+    public User createUser(CreateUserRequest request) {
+        return userRepository.save(UserMapper.toEntity(request));
     }
 }
