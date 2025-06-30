@@ -4,8 +4,8 @@ import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
-import com.pkielbasa.pocketplan.exception.ResourceNotFoundException;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
+import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,11 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService transactionService;
+    private final EntityFetcherService entityFetcherService;
 
     @GetMapping("/{id}")
     ResponseEntity<Transaction> getTransactionById(@PathVariable("id") long id) {
-        Transaction transaction = transactionService.getTransactions(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transaction with id " + id + " not found"));
+        Transaction transaction = entityFetcherService.fetchTransactionOrThrow(id);
         return ResponseEntity.ok(transaction);
     }
 

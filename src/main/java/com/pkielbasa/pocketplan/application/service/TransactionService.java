@@ -7,7 +7,6 @@ import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
-import com.pkielbasa.pocketplan.domain.repository.BudgetRepository;
 import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
 import com.pkielbasa.pocketplan.infrastructure.repository.specification.TransactionSpecification;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,11 +22,6 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final EntityFetcherService entityFetcherService;
-
-
-    public Optional<Transaction> getTransactions(long id) {
-        return transactionRepository.getTransactionById(id);
-    }
 
     public Transaction createTransaction(CreateTransactionRequest request) {
         Budget budget = entityFetcherService.fetchBudgetOrThrow(request.budgetId());
