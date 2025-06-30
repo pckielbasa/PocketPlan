@@ -3,7 +3,6 @@ package com.pkielbasa.pocketplan.application.service;
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
-import com.pkielbasa.pocketplan.application.exception.ResourceNotFoundException;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.Budget;
@@ -24,7 +23,6 @@ import java.util.Optional;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
-    private final BudgetRepository budgetRepository;
     private final EntityFetcherService entityFetcherService;
 
 
@@ -33,8 +31,7 @@ public class TransactionService {
     }
 
     public Transaction createTransaction(CreateTransactionRequest request) {
-        Budget budget = budgetRepository.getBudgetById(request.budgetId())
-                .orElseThrow(() -> new ResourceNotFoundException("Budget by id: "+ request.budgetId() +" not found"));
+        Budget budget = entityFetcherService.fetchBudgetOrThrow(request.budgetId());
         return transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
     }
 

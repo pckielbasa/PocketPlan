@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = {"budgets"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,7 +18,6 @@ import java.util.Set;
 public class User {
 
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -45,7 +43,6 @@ public class User {
     @NotBlank
     private String surname;
 
-    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             name = "user_budget",

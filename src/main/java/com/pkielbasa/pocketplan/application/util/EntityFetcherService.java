@@ -1,6 +1,6 @@
 package com.pkielbasa.pocketplan.application.util;
 
-import com.pkielbasa.pocketplan.application.exception.ResourceNotFoundException;
+import com.pkielbasa.pocketplan.exception.ResourceNotFoundException;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.BudgetRepository;
