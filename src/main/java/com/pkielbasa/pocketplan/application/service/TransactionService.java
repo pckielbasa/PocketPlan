@@ -42,6 +42,7 @@ public class TransactionService {
     }
 
     public void deleteTransactionById(long id) {
+        entityFetcherService.fetchTransactionOrThrow(id);
         transactionRepository.deleteTransactionById(id);
     }
 

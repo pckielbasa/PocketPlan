@@ -44,4 +44,9 @@ public class UserService {
         UserMapper.updateEntity(oldUser, request);
         return UserMapper.mapToResponse(userRepository.updateUser(oldUser));
     }
+
+    public void deleteUser(long userId) {
+        entityFetcherService.fetchUserOrThrow(userId);
+        userRepository.deleteUserById(userId);
+    }
 }
