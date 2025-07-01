@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface JpaUserRepository extends JpaRepository<User, Long> {
     @Query("""
-    SELECT new com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection(
-        u.id,
-        u.username,
-        u.email,
-        u.firstName,
-        u.surname
-    )
-    FROM User u
-""")
+                SELECT new com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection(
+                    u.id,
+                    u.username,
+                    u.email,
+                    u.firstName,
+                    u.surname
+                )
+                FROM User u
+            """)
     List<UserSummaryProjection> findAllUserSummaries();
 }
