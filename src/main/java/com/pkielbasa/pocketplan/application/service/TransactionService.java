@@ -8,7 +8,7 @@ import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
 import com.pkielbasa.pocketplan.domain.repository.TransactionRepository;
-import com.pkielbasa.pocketplan.infrastructure.repository.specification.TransactionSpecification;
+import com.pkielbasa.pocketplan.infrastructure.specification.TransactionSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;

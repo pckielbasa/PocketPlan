@@ -9,6 +9,8 @@ import com.pkielbasa.pocketplan.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -22,5 +24,17 @@ public class UserService {
 
     public User createUser(CreateUserRequest request) {
         return userRepository.save(UserMapper.toEntity(request));
+    }
+
+    public List<UserResponse> getAllUsers() {
+        return userRepository.getAllUsers().stream()
+                .map(projection -> new UserResponse(
+                        projection.id(),
+                        projection.username(),
+                        projection.email(),
+                        projection.firstName(),
+                        projection.surname()
+                ))
+                .toList();
     }
 }
