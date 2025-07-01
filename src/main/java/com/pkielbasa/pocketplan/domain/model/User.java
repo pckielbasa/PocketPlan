@@ -43,7 +43,7 @@ public class User {
     @NotBlank
     private String surname;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_budget",
             joinColumns = @JoinColumn(name = "user_id"),
