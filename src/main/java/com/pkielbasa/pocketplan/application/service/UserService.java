@@ -1,5 +1,6 @@
 package com.pkielbasa.pocketplan.application.service;
 
+import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
@@ -36,5 +37,11 @@ public class UserService {
                         projection.surname()
                 ))
                 .toList();
+    }
+
+    public UserResponse updateUser(UpdateUserRequest request, long userId) {
+        User oldUser = entityFetcherService.fetchUserOrThrow(userId);
+        UserMapper.updateEntity(oldUser, request);
+        return UserMapper.mapToResponse(userRepository.updateUser(oldUser));
     }
 }
