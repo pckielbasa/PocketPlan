@@ -9,14 +9,19 @@ src
              │
              ├─ application          // serwisy aplikacyjne, koordynacja operacji
              │    ├─ service         // serwisy aplikacyjne (koordynują użycie domeny)
-             │    └─ dto             // DTO do komunikacji z zewnątrz
+             │    └─ util
+             │
+             ├─ exception
+             │    ├─
              │
              ├─ infrastructure       // implementacje repozytoriów, integracje, konfiguracje
              │    ├─ repository      // implementacje repozytoriów (np. JpaRepository)
              │    │    ├─ impl       // implementacja repozytoriów
+             │    │    ├─ specification
              │    │    └─ jpa        // implementacja JpaRepository
              │    └─ config          // konfiguracje techniczne
              │
              └─ api                  // warstwa wejścia/wyjścia
                   ├─ rest            // kontrolery REST
+                  ├─ dto
                   └─ mapper          // mapowanie między encjami a DTO

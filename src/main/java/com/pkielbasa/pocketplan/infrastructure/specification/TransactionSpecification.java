@@ -1,4 +1,4 @@
-package com.pkielbasa.pocketplan.infrastructure.repository.specification;
+package com.pkielbasa.pocketplan.infrastructure.specification;
 
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
