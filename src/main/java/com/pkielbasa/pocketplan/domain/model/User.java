@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,36 +12,35 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     @NotBlank
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
     @NotBlank
+    @Column(nullable = false)
     private String password;
-
-    @Column(name = "email_address", nullable = false, unique = true)
 
     @NotBlank
     @Email
+    @Column(name = "email_address", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "first_name", nullable = false)
     @NotBlank
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "surname", nullable = false)
     @NotBlank
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -54,12 +54,9 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        if (id == null || user.id == null) {
-            return false;
-        }
-        return id.equals(user.id);
+        if (!(o instanceof User)) return false;
+        User other = (User) o;
+        return id != null && id.equals(other.id);
     }
 
     @Override

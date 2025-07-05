@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -12,9 +13,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "budget")
 public class Budget {
 
@@ -22,20 +23,20 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "initial_budget", nullable = false)
-    @NotNull(message = "budget init cannot be null")
     private BigDecimal initialBudget;
 
-    @Column(name = "current_budget", nullable = false)
     @NotNull
+    @Column(name = "current_budget", nullable = false)
     private BigDecimal currentBudget;
 
-    @Column(name = "budget_day", nullable = false)
     @NotNull
+    @Column(name = "budget_day", nullable = false)
     private String budgetDay ;
 
-    @Column(name = "budget_type", nullable = false)
     @NotBlank
+    @Column(name = "budget_type", nullable = false)
     private String budgetType;
 
     @ManyToMany(mappedBy = "budgets")
@@ -44,12 +45,9 @@ public class Budget {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Budget budget = (Budget) o;
-        if (id == null || budget.id == null) {
-            return false;
-        }
-        return id.equals(budget.id);
+        if (!(o instanceof Budget)) return false;
+        Budget other = (Budget) o;
+        return id != null && id.equals(other.id);
     }
 
     @Override

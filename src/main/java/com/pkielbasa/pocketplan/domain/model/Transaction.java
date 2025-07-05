@@ -4,46 +4,61 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter
+@Getter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "transactions")
 public class Transaction {
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "budget_id", nullable = false)
-    @NotNull
     private Budget budget;
 
-    @Column(name = "name", nullable = false)
     @NotBlank
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column
     private String description;
 
-    @Column(name = "type", nullable = false)
     @NotBlank
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "fee", nullable = false)
     @NotBlank
+    @Column(name = "fee", nullable = false)
     private BigDecimal fee;
 
-    @Column(name = "date" , nullable = false)
     @NotNull
+    @Column(name = "date" , nullable = false)
     private LocalDateTime date;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transaction)) return false;
+        Transaction other = (Transaction) o;
+        return id != null && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }
 
 
