@@ -9,12 +9,14 @@ src
              │
              ├─ application          // serwisy aplikacyjne, koordynacja operacji
              │    ├─ service         // serwisy aplikacyjne (koordynują użycie domeny)
-             │    └─ util
+             │    └─ util            // implementacja dodatkowych klas
              │
-             ├─ exception
+             ├─ exception            //obsługa wyjątków
              │    ├─
              │
              ├─ infrastructure       // implementacje repozytoriów, integracje, konfiguracje
+             │    ├─ projection      // impementacja "dto" dla encji pobieranych z bazy
+             │    ├─ specification   // specyfikacja dla getMapping'ów
              │    ├─ repository      // implementacje repozytoriów (np. JpaRepository)
              │    │    ├─ impl       // implementacja repozytoriów
              │    │    ├─ specification
