@@ -2,12 +2,18 @@ package com.pkielbasa.pocketplan.application.service;
 
 import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
+import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
+import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.User;
 import com.pkielbasa.pocketplan.domain.repository.UserRepository;
+import com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection;
+import com.pkielbasa.pocketplan.infrastructure.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +33,10 @@ public class UserService {
         return userRepository.save(UserMapper.toEntity(request));
     }
 
-    public List<UserResponse> getAllUsers() {
-        return userRepository.getAllUsers().stream()
+    public List<UserResponse> getUsers(UserSearchCriteria criteria) {
+        Specification<UserSummaryProjection> spec = UserSpecification.byCriteria(criteria);
+        Sort sort = SortUtils.buildSort(criteria.sort(), criteria.destination());
+        return userRepository.getUsers(spec, sort).stream()
                 .map(projection -> new UserResponse(
                         projection.id(),
                         projection.username(),

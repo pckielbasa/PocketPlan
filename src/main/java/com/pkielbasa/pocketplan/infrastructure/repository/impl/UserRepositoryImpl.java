@@ -5,6 +5,8 @@ import com.pkielbasa.pocketplan.domain.repository.UserRepository;
 import com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection;
 import com.pkielbasa.pocketplan.infrastructure.repository.jpa.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,7 +29,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserSummaryProjection> getAllUsers() {
+    public List<User> findAll(Specification<User> spec, Sort sort) {
+        return jpaUserRepository.findAll();
+    }
+
+    @Override
+    public List<User> getUsers(Specification<User> specification, Sort sort) {
         return jpaUserRepository.findAllUserSummaries();
     }
 

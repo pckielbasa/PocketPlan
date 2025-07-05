@@ -3,6 +3,7 @@ package com.pkielbasa.pocketplan.api.rest;
 import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
+import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.application.service.UserService;
 import com.pkielbasa.pocketplan.domain.model.User;
@@ -35,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserResponse>> getUsers(@RequestBody UserSearchCriteria criteria) {
+        return ResponseEntity.ok(userService.getUsers(criteria));
     }
 
     @PutMapping("/{id}")
