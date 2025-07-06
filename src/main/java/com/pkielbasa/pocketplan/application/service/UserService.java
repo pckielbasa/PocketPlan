@@ -1,10 +1,7 @@
 package com.pkielbasa.pocketplan.application.service;
 
-import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
-import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
-import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
+import com.pkielbasa.pocketplan.api.dto.user.*;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
-import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.User;
@@ -28,8 +25,9 @@ public class UserService {
         return UserMapper.mapToResponse(entityFetcherService.fetchUserOrThrow(userId));
     }
 
-    public User createUser(CreateUserRequest request) {
-        return userRepository.save(UserMapper.toEntity(request));
+    public UserResponse createUser(CreateUserRequest request) {
+        User user = userRepository.save(UserMapper.toEntity(request));
+        return UserMapper.mapToResponse(user);
     }
 
     public List<UserResponse> getUsers(UserSearchCriteria criteria) {

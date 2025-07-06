@@ -1,8 +1,6 @@
 package com.pkielbasa.pocketplan.domain.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -22,24 +20,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank
     @Column(nullable = false)
     private String password;
 
-    @NotBlank
-    @Email
     @Column(name = "email_address", nullable = false, unique = true)
     private String email;
 
-    @NotBlank
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @NotBlank
     @Column(name = "surname", nullable = false)
     private String surname;
 

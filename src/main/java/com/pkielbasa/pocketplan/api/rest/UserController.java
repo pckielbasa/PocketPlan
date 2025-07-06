@@ -1,12 +1,9 @@
 package com.pkielbasa.pocketplan.api.rest;
 
-import com.pkielbasa.pocketplan.api.dto.user.CreateUserRequest;
-import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
-import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
-import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
-import com.pkielbasa.pocketplan.api.mapper.UserMapper;
+import com.pkielbasa.pocketplan.api.dto.user.*;
 import com.pkielbasa.pocketplan.application.service.UserService;
-import com.pkielbasa.pocketplan.domain.model.User;
+import com.pkielbasa.pocketplan.application.util.UriBuilder;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UriBuilder uriBuilder;
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable long id) {
@@ -28,15 +26,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
-        User user = userService.createUser(request);
-        URI location = URI.create("/api/users/" + user.getId());
-        UserResponse response = UserMapper.mapToResponse(user);
-        return ResponseEntity.created(location).body(response);
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
+        UserResponse user = userService.createUser(request);
+        URI location = uriBuilder.buildUri(user.id());
+        return ResponseEntity.created(location).body(user);
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getUsers(UserSearchCriteria criteria) {
+    public ResponseEntity<List<UserResponse>> getUsers(@ModelAttribute UserSearchCriteria criteria) {
         return ResponseEntity.ok(userService.getUsers(criteria));
     }
 
@@ -47,7 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserResponse> deleteUser(@PathVariable long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
