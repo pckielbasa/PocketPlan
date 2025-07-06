@@ -9,7 +9,6 @@ import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
 import com.pkielbasa.pocketplan.application.util.SortUtils;
 import com.pkielbasa.pocketplan.domain.model.User;
 import com.pkielbasa.pocketplan.domain.repository.UserRepository;
-import com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection;
 import com.pkielbasa.pocketplan.infrastructure.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -34,15 +33,15 @@ public class UserService {
     }
 
     public List<UserResponse> getUsers(UserSearchCriteria criteria) {
-        Specification<UserSummaryProjection> spec = UserSpecification.byCriteria(criteria);
+        Specification<User> spec = UserSpecification.byCriteria(criteria);
         Sort sort = SortUtils.buildSort(criteria.sort(), criteria.destination());
-        return userRepository.getUsers(spec, sort).stream()
+        return userRepository.findAllUsers(spec, sort).stream()
                 .map(projection -> new UserResponse(
-                        projection.id(),
-                        projection.username(),
-                        projection.email(),
-                        projection.firstName(),
-                        projection.surname()
+                        projection.getId(),
+                        projection.getUsername(),
+                        projection.getEmail(),
+                        projection.getFirstName(),
+                        projection.getSurname()
                 ))
                 .toList();
     }

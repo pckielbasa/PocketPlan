@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getUsers(@RequestBody UserSearchCriteria criteria) {
+    public ResponseEntity<List<UserResponse>> getUsers(UserSearchCriteria criteria) {
         return ResponseEntity.ok(userService.getUsers(criteria));
     }
 

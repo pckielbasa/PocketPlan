@@ -1,14 +1,12 @@
 package com.pkielbasa.pocketplan.infrastructure.specification;
 
-import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
 import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
 import com.pkielbasa.pocketplan.domain.model.User;
-import com.pkielbasa.pocketplan.infrastructure.projection.UserSummaryProjection;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecification {
-    public static Specification<UserSummaryProjection> byCriteria(UserSearchCriteria criteria) {
+    public static Specification<User> byCriteria(UserSearchCriteria criteria) {
         return (root, query, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
 
@@ -42,7 +40,7 @@ public class UserSpecification {
             if (criteria.surname() != null) {
                 predicate = criteriaBuilder.and(predicate,
                         criteriaBuilder.equal(
-                                criteriaBuilder.lower(root.get("surnmae")),
+                                criteriaBuilder.lower(root.get("surname")),
                                 criteria.surname().toLowerCase()
                         )
                 );
