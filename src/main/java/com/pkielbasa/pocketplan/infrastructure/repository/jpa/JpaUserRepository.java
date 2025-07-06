@@ -9,10 +9,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface JpaUserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     @EntityGraph(attributePaths = {"budgets"})
     List<User> findAll(Specification<User> spec,Sort sort);
-
+    @EntityGraph(attributePaths = {"budgets"})
+    Optional<User> getUserById(long id);
 }
