@@ -1,4 +1,4 @@
-package com.pkielbasa.pocketplan.api.dto.user;
+package com.pkielbasa.pocketplan.api.dto.criteria;
 
 public record UserSearchCriteria(
         String username,

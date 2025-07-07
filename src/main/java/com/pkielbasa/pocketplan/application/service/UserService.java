@@ -1,5 +1,6 @@
 package com.pkielbasa.pocketplan.application.service;
 
+import com.pkielbasa.pocketplan.api.dto.criteria.UserSearchCriteria;
 import com.pkielbasa.pocketplan.api.dto.user.*;
 import com.pkielbasa.pocketplan.api.mapper.UserMapper;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;

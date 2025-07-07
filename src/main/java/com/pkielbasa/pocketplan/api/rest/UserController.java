@@ -1,5 +1,6 @@
 package com.pkielbasa.pocketplan.api.rest;
 
+import com.pkielbasa.pocketplan.api.dto.criteria.UserSearchCriteria;
 import com.pkielbasa.pocketplan.api.dto.user.*;
 import com.pkielbasa.pocketplan.application.service.UserService;
 import com.pkielbasa.pocketplan.application.util.UriBuilder;
