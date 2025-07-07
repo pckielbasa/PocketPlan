@@ -1,6 +1,6 @@
 package com.pkielbasa.pocketplan.application.service;
 
-import com.pkielbasa.pocketplan.api.dto.transaction.TransactionSearchCriteria;
+import com.pkielbasa.pocketplan.api.dto.criteria.TransactionSearchCriteria;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;

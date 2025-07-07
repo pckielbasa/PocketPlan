@@ -1,4 +1,4 @@
-package com.pkielbasa.pocketplan.api.dto.transaction;
+package com.pkielbasa.pocketplan.api.dto.criteria;
 
 public record TransactionSearchCriteria(
         String name,

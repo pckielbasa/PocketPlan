@@ -1,6 +1,6 @@
 package com.pkielbasa.pocketplan.infrastructure.specification;
 
-import com.pkielbasa.pocketplan.api.dto.user.UserSearchCriteria;
+import com.pkielbasa.pocketplan.api.dto.criteria.UserSearchCriteria;
 import com.pkielbasa.pocketplan.domain.model.User;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
