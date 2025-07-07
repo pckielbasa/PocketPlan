@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="change-fk-user-budget-user-on-delete-cascade" author="pkielbasa">
+        <dropForeignKeyConstraint
+                baseTableName="user_budget"
+                constraintName="fk_user_budget_user"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_budget"
+                baseColumnNames="user_id"
+                constraintName="fk_user_budget_user"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
