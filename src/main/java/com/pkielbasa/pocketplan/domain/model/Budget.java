@@ -7,8 +7,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -39,8 +38,10 @@ public class Budget {
     @Column(name = "budget_type", nullable = false)
     private String budgetType;
 
-    @ManyToMany(mappedBy = "budgets")
-    private Set<User> users = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "user_budget", joinColumns = @JoinColumn(name = "budget_id"))
+    @Column(name = "user_id")
+    private List<Long> userIds = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
