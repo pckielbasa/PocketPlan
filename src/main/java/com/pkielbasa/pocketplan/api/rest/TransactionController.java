@@ -1,14 +1,15 @@
 package com.pkielbasa.pocketplan.api.rest;
 
 import com.pkielbasa.pocketplan.api.dto.criteria.TransactionSearchCriteria;
+import com.pkielbasa.pocketplan.api.dto.transaction.UpdateTransactionRequest;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
 import com.pkielbasa.pocketplan.application.service.TransactionService;
-import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
+import com.pkielbasa.pocketplan.application.util.UriBuilder;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,24 +22,18 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService transactionService;
-    private final EntityFetcherService entityFetcherService;
+    private final UriBuilder uriBuilder;
 
     @GetMapping("/{id}")
-    ResponseEntity<Transaction> getTransactionById(@PathVariable("id") long id) {
-        Transaction transaction = entityFetcherService.fetchTransactionOrThrow(id);
-        return ResponseEntity.ok(transaction);
+    ResponseEntity<TransactionResponse> getTransactionById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(transactionService.getTransaction(id));
     }
 
     @PostMapping
-    ResponseEntity<TransactionResponse> createTransaction(@RequestBody CreateTransactionRequest request) {
-        try {
-            Transaction transaction = transactionService.createTransaction(request);
-            URI location = new URI("/api/transactions/" + transaction.getId());
-            TransactionResponse response = TransactionMapper.mapToResponse(transaction);
-            return ResponseEntity.created(location).body(response);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    ResponseEntity<TransactionResponse> createTransaction(@Valid @RequestBody CreateTransactionRequest request) {
+        TransactionResponse transactionResponse = transactionService.createTransaction(request);
+        URI location = uriBuilder.buildUri(transactionResponse.id());
+        return ResponseEntity.created(location).body(transactionResponse);
     }
 
     @GetMapping()
@@ -47,13 +42,12 @@ public class TransactionController {
         List<TransactionResponse> responses = transactions.stream()
                 .map(TransactionMapper::mapToResponse)
                 .toList();
-
         return ResponseEntity.ok(responses);
     }
 
     @PutMapping("/{id}")
     ResponseEntity<TransactionResponse> updateTransaction(@PathVariable("id") long id,
-                                                          @RequestBody CreateTransactionRequest request) {
+                                                          @RequestBody UpdateTransactionRequest request) {
         return ResponseEntity.ok(TransactionMapper.mapToResponse(transactionService.updateTransaction(request, id)));
     }
 

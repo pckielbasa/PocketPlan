@@ -1,6 +1,8 @@
 package com.pkielbasa.pocketplan.application.service;
 
 import com.pkielbasa.pocketplan.api.dto.criteria.TransactionSearchCriteria;
+import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
+import com.pkielbasa.pocketplan.api.dto.transaction.UpdateTransactionRequest;
 import com.pkielbasa.pocketplan.api.mapper.TransactionMapper;
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.application.util.EntityFetcherService;
@@ -23,9 +25,14 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final EntityFetcherService entityFetcherService;
 
-    public Transaction createTransaction(CreateTransactionRequest request) {
+    public TransactionResponse getTransaction(Long transactionId) {
+        return TransactionMapper.mapToResponse(entityFetcherService.fetchTransactionOrThrow(transactionId));
+    }
+
+    public TransactionResponse createTransaction(CreateTransactionRequest request) {
         Budget budget = entityFetcherService.fetchBudgetOrThrow(request.budgetId());
-        return transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
+        Transaction transaction = transactionRepository.createTransaction(TransactionMapper.mapToEntity(request, budget));
+        return TransactionMapper.mapToResponse(transaction);
     }
 
     public List<Transaction> getTransactions(TransactionSearchCriteria criteria) {
@@ -34,10 +41,9 @@ public class TransactionService {
         return transactionRepository.getTransactions(spec, sort);
     }
 
-    public Transaction updateTransaction(CreateTransactionRequest request, long id) {
+    public Transaction updateTransaction(UpdateTransactionRequest request, long id) {
         Transaction oldTransaction = entityFetcherService.fetchTransactionOrThrow(id);
-        Budget budget = entityFetcherService.fetchBudgetOrThrow(request.budgetId());
-        TransactionMapper.updateEntity(oldTransaction, request, budget);
+        TransactionMapper.updateEntity(oldTransaction, request);
         return transactionRepository.updateTransaction(oldTransaction);
     }
 
