@@ -2,8 +2,11 @@ package com.pkielbasa.pocketplan.api.mapper;
 
 import com.pkielbasa.pocketplan.api.dto.transaction.CreateTransactionRequest;
 import com.pkielbasa.pocketplan.api.dto.transaction.TransactionResponse;
+import com.pkielbasa.pocketplan.api.dto.transaction.UpdateTransactionRequest;
 import com.pkielbasa.pocketplan.domain.model.Budget;
 import com.pkielbasa.pocketplan.domain.model.Transaction;
+
+import java.util.Optional;
 
 public class TransactionMapper {
 
@@ -30,12 +33,11 @@ public class TransactionMapper {
         );
     }
 
-    public static void updateEntity(Transaction existingTransaction, CreateTransactionRequest request, Budget budget) {
+    public static void updateEntity(Transaction existingTransaction, UpdateTransactionRequest request) {
         existingTransaction.setName(request.name());
-        existingTransaction.setDescription(request.description());
+        Optional.ofNullable(request.description()).ifPresent(existingTransaction::setDescription);
         existingTransaction.setType(request.type());
         existingTransaction.setFee(request.fee());
         existingTransaction.setDate(request.date());
-        existingTransaction.setBudget(budget);
     }
 }

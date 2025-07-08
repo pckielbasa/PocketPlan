@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record CreateTransactionRequest(
-        @NotNull Long budgetId,
+public record UpdateTransactionRequest(
         @NotBlank String name,
         String description,
         @NotBlank String type,

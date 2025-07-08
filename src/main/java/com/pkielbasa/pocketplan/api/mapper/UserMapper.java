@@ -5,6 +5,8 @@ import com.pkielbasa.pocketplan.api.dto.user.UpdateUserRequest;
 import com.pkielbasa.pocketplan.api.dto.user.UserResponse;
 import com.pkielbasa.pocketplan.domain.model.User;
 
+import java.util.Optional;
+
 public class UserMapper {
 
     public static User toEntity(CreateUserRequest createUserRequest) {
@@ -27,10 +29,10 @@ public class UserMapper {
         );
     }
 
-    public static void updateEntity(User existingUser, UpdateUserRequest createUserRequest) {
-        existingUser.setUsername(createUserRequest.username());
-        existingUser.setEmail(createUserRequest.email());
-        existingUser.setFirstName(createUserRequest.firstName());
-        existingUser.setSurname(createUserRequest.surname());
+    public static void updateEntity(User existingUser, UpdateUserRequest request) {
+        Optional.ofNullable(request.username()).ifPresent(existingUser::setUsername);
+        Optional.ofNullable(request.email()).ifPresent(existingUser::setEmail);
+        Optional.ofNullable(request.firstName()).ifPresent(existingUser::setFirstName);
+        Optional.ofNullable(request.surname()).ifPresent(existingUser::setSurname);
     }
 }
