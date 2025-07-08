@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/budget
+Content-Type: application/json
+
+{
+  "initialBudget": 1222,
+  "currentBudget": 1123,
+  "budgetDay": "test",
+  "budgetType": "test"
+}

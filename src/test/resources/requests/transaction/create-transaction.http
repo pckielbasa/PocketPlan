@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/transactions
+Content-Type: application/json
+
+{
+  "budgetId": 4,
+  "name": "ja",
+  "description": "ty",
+  "type": "test",
+  "date": "2025-06-25T19:53:16",
+  "fee": 12.23
+}

@@ -1,0 +1,11 @@
+PUT http://localhost:8080/api/transactions/13
+Content-Type: application/json
+
+{
+  "budgetId": 4,
+  "name": "t334st",
+  "description": "te31234t",
+  "type": "te23123st",
+  "date": "2025-06-25T19:53:16",
+  "fee": 12111.23
+}
